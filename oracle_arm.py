@@ -227,6 +227,7 @@ class InsCreate:
         self.gen_pwd()
         while True:
             try:
+                self.tf.display_name = "instance-"+time.strftime("%m%d%H%M%S", time.localtime())
                 ins = self.lunch_instance()  # 应该返回具体的成功的数据
             except oci.exceptions.ServiceError as e:
                 if e.status == 429 and e.code == 'TooManyRequests' and e.message == 'Too many requests for the user':
