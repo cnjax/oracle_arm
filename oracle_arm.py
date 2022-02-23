@@ -232,10 +232,9 @@ class InsCreate:
                 if e.status == 429 and e.code == 'TooManyRequests' and e.message == 'Too many requests for the user':
                     # 被限速了，改一下时间
                     print("请求太快了，自动调整请求时间ing")
-                    if self.sleep_time < 60:
-                        self.sleep_time += 10
-                elif not (e.status == 500 and e.code == 'InternalError'
-                          and e.message == 'Out of host capacity.'):
+                    if self.sleep_time < 15:
+                        self.sleep_time += 1
+                elif not (e.status == 500 and e.code == 'InternalError'):
                     if "Service limit" in e.message and e.status==400:
 
                         # 可能是别的错误，也有可能是 达到上限了，要去查看一下是否开通成功，也有可能错误了
@@ -248,7 +247,7 @@ class InsCreate:
                     # 没有被限速，恢复减少的时间
                     print("目前没有请求限速,快马加刷中")
                     if self.sleep_time > 15:
-                        self.sleep_time -= 10
+                        self.sleep_time -= 2
                 print("本次返回信息:",e)
                 time.sleep(self.sleep_time)
             else:
