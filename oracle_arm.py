@@ -196,7 +196,7 @@ class FileParser:
 
 class InsCreate:
     shape = 'VM.Standard.A1.Flex'
-    sleep_time = 12.0
+    sleep_time = 14.0
     try_count = 0
     desp = ""
 
